@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Jazyk stránky -->
+<head>
+    <title>Testing MyApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responzivita -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm" action="index.php" method="get">
+        <h1>Welcome</h1>
+        
+        <!-- First Name input with label -->
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" placeholder="Enter your first name">
+        
+        <!-- City input with label -->
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" placeholder="Enter your city">
+        
+        <!-- Submit button with proper type and value -->
+        <input type="submit" value="Submit">
+    </form>
+    <p id="result"></p> 
+    <script>
+        const form = document.getElementById('myForm');
+        const resultParagraph = document.getElementById('result');
+
+        // Získání jazyka prohlížeče
+        const browserLanguage = navigator.language || navigator.languages[0];
+
+        // Překlad textů na základě jazyka prohlížeče
+        const translations = {
+            en: {
+                invalidInput: "Invalid input: First Name or City contains invalid characters.",
+                emptyField: "Invalid input: First Name or City is empty.",
+                success: "Welcome",
+            },
+            cs: {
+                invalidInput: "Neplatné údaje: Jméno nebo město obsahuje neplatné znaky.",
+                emptyField: "Neplatné údaje: Jméno nebo město je prázdné.",
+                success: "Vítejte",
+            },
+        };
+
+        const lang = translations[browserLanguage] || translations.en;
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const firstName = form.firstname.value.trim().normalize('NFC'); // Normalizace
+            const city = form.city.value.trim().normalize('NFC'); // Normalizace
+
+            // Funkce pro kontrolu prázdného vstupu
+            function isEmpty(str) {
+                return str === "";
+            }
+
+            // Funkce pro kontrolu číslic
+            function containsNumbers(str) {
+                return /\d/.test(str);
+            }
+
+            // Funkce pro kontrolu speciálních znaků
+            function containsSpecialCharacters(str) {
+                const specialChars = /[!@#$%^&*(),.?":{}|<>\\/-]/;
+                return specialChars.test(str);
+            }
+
+            // Funkce pro kontrolu emoji
+            function containsEmoji(str) {
+                const emojiPattern = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/;
+                return emojiPattern.test(str);
+            }
+
+            // Ověření, jestli jsou údaje validní
+            if (isEmpty(firstName) || isEmpty(city)) {
+                resultParagraph.textContent = lang.emptyField;
+                resultParagraph.style.color = "red";
+                return;
+            }
+
+            if (containsNumbers(firstName) || containsNumbers(city) || containsSpecialCharacters(firstName) || containsSpecialCharacters(city) || containsEmoji(firstName) || containsEmoji(city)) {
+                resultParagraph.textContent = lang.invalidInput;
+                resultParagraph.style.color = "red";
+                return;
+            }
+
+            // Funkce pro spočítání samohlásek a souhlásek
+            function countVowelsAndConsonants(str) {
+                const vowels = 'aeiouáéíóúůýAEIOUÁÉÍÓÚŮÝ';
+                let vowelCount = 0;
+                let consonantCount = 0;
+
+                for (let i = 0; i < str.length; i++) {
+                    if (vowels.includes(str[i])) {
+                        vowelCount++;
+                    } else if (str[i].match(/[a-zA-ZčďěňřšťžČĎĚŇŘŠŤŽ]/)) {
+                        consonantCount++;
+                    }
+                }
+
+                return { vowelCount, consonantCount };
+            }
+
+            // Spočítáme samohlásky a souhlásky pro jméno a město
+            const firstNameCounts = countVowelsAndConsonants(firstName);
+            const cityCounts = countVowelsAndConsonants(city);
+
+            // Sestavíme výslednou větu
+            const result = `${lang.success} (${firstName}) from (${city}). There are ${firstNameCounts.vowelCount} vowels in your first name and ${firstNameCounts.consonantCount} consonants in your first name, and there are ${cityCounts.vowelCount} vowels in your city and ${cityCounts.consonantCount} consonants in your city.`;
+
+            resultParagraph.textContent = result;
+            resultParagraph.style.color = "black";
+        });
+    </script>
+</body>
+</html>
