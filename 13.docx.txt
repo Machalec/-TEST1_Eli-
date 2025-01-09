@@ -1,0 +1,143 @@
+﻿Testování webové stránky
+Testovací scénář
+	Vstupní data
+	Očekávaný výstup
+	Skutečný výstup
+	Bug report
+	Čísla v kolonce Firstname
+	01235
+	Chyba: Zadejte platné jméno
+	Welcome 01235 from . There are 0 vowels in your first name and 5 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	V kolonce Firstname nesmi byt zadany číslice
+	Čísla v kolonce City
+	01235
+	Chyba: Zadejte platné město
+	Welcome from 01235. There are 0 vowels in your first name and 0 consonants in your first name and there are 0 vowels in your city and 5 consonants in your city.
+	V kolonce City nesmi byt zadany číslice
+	Jenom mezery v kolonce Firstname
+	 *mezera(space)
+	Chyba: Zadejte platné jméno
+	Welcome from . There are 0 vowels in your first name and 1 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	Ve formuláři by měla být podmínka pro tlačítko při stisknutí, když jsou v kolonce jenom mezery, mělo by to vypsat chybu
+	Jenom mezery v kolonce City
+	   *mezera(space)
+	Chyba: Zadejte platné město
+	Welcome from . There are 0 vowels in your first name and 0 consonants in your first name and there are 0 vowels in your city and 1 consonants in your city.
+	Ve formuláři by měla být podmínka pro tlačítko při stisknutí, když jsou v kolonce jenom mezery, mělo by to vypsat chybu
+	Mezery v obou kolonkách
+	*mezera(space)
+
+
+*mezera(space)
+	Chyba: Zadejte platné údaje do kolonek FirstName a City
+	Welcome from . There are 0 vowels in your first name and 1 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	Ve formuláři by měla být podmínka pro tlačítko při stisknutí, když jsou v kolonce jenom mezery, mělo by to vypsat chybu
+	Znaky v kolonce Firstname
+	>ß$ß*--/
+	Chyba: Zadejte platné jméno
+	Welcome >ß$ß*--/ from . There are 0 vowels in your first name and 10 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	V kolonce Firstname nesmi byt zadany znaky: #,._!”/(!/):°;--+´=&@{}][€|\~ˇ^˘°˛`˙´˝¨¸÷×ß$<>¤¨¨’
+	Znaky v kolonce City
+	>ß$ß*--/
+	Chyba: Zadejte platné město
+	Welcome from >ß$ß*--/. There are 0 vowels in your first name and 0 consonants in your first name and there are 0 vowels in your city and 10 consonants in your city.
+	V kolonce city nesmi byt zadany znaky: #,._!”/(!/):°;--+´=&@{}][€|\~ˇ^˘°˛`˙´˝¨¸÷×ß$<>¤¨¨’
+	Emojis v kolonce Firstname
+	😀
+	Chyba:Zadejte platné jméno
+	Welcome 😀 from . There are 0 vowels in your first name and 4 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	V kolonce city nesmi byt zadany emojis
+	Emojis v kolonce City
+	😀
+	Chyba: Zadejte platné město
+	Welcome from 😀. There are 0 vowels in your first name and 0 consonants in your first name and there are 0 vowels in your city and 4 consonants in your city.
+	V kolonce city nesmi byt zadany emojis
+	Odeslání formuláře při vyplnění kolonky FirstName a nevyplnění kolonky City
+	sdfs
+
+
+null
+	Chyba: Vyplňte obě dvě kolonky 
+	Welcome sdfs from . There are 0 vowels in your first name and 4 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	Ve formuláři by měla být podmínka pro odeslání dat jenom pokud jsou obě kolonky vyplněny
+<input type="text" name="firstname" required> <input type="text" name="city" required>
+	Odeslání formuláře při vyplnění kolonky City a nevyplnění kolonky FirstName
+	null
+
+
+fsdfsdfs
+	Chyba: Vyplňte obě dvě kolonky 
+	null
+	Ve formuláři by měla být podmínka pro odeslání dat jenom pokud jsou obě kolonky vyplněny
+<input type="text" name="firstname" required> <input type="text" name="city" required>
+
+
+
+
+	Web není responzibilní
+	Zmenšení stránky do okna, otevření na telefonu
+	Responzibilita stránky, zobrazení formuláře v okně, věta pro výpis rozkouskovaná pro celé přečtení, na telefonu nejde přečíst(text se nezvětšil)
+	Není responzibilní, věta se nedá přečíst, formulář nejde vidět 
+	Responzibilita pro menší okna, nebo zařízení
+	Zadání samohlásek s diakritikou v kolonce FirstName
+	 áááá
+	Welcome áááá from . There are 8 vowels in your first name and 0 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	Welcome áááá from . There are 0 vowels in your first name and 8 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	Web by se mohl překládat do jazyka prohlížeče uživatele, tím by se vyrušily chyby
+	Zadání samohlásek s diakritikou v kolonce City
+	 áááá
+	Welcome  from áááá. There are 0 vowels in your first name and 0 consonants in your first name and there are 8 vowels in your city and 0 consonants in your city.
+	Welcome  from áááá. There are 0 vowels in your first name and 0 consonants in your first name and there are 0 vowels in your city and 8 consonants in your city.
+	Web by se mohl překládat do jazyka prohlížeče uživatele, tím by se vyrušily chyby
+	Písmeno s diakritikou se bere jako dva znaky v kolonce FirstName
+	žžžž
+	Welcome žžžž from . There are 0 vowels in your first name and 4 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	Welcome žžžž from . There are 0 vowels in your first name and 8 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.
+	Web by se mohl překládat do jazyka prohlížeče uživatele, tím by se vyrušily chyby
+	Písmeno s diakritikou se bere jako dva znaky v kolonce City
+	žžžž
+	Welcome from žžžž. There are 0 vowels in your first name and 0 consonants in your first name and there are 0 vowels in your city and 4 consonants in your city.
+	Welcome from žžžž. There are 0 vowels in your first name and 0 consonants in your first name and there are 0 vowels in your city and 8 consonants in your city.
+	Web by se mohl překládat do jazyka prohlížeče uživatele, tím by se vyrušily chyby
+	Po otevření průzkumníku (F12): Firstname není v labelu
+	“ First Name: ” 
+	<label for="firstname">First Name:</label>
+	FirstName:
+
+
+
+
+	pro spravne nacteni stranky a pro responzivitu se tam musi dat label ve formu
+	Po otevření průzkumníku (F12): City není v labelu
+	“ City: “
+	<label for="firstname">City:</label>
+	City:
+	pro spravne nacteni stranky a pro responzivitu se tam musi dat label ve formu
+	Po otevření průzkumníku (F12): tlačítko Odeslat by mělo mít hodnotu submit
+	<input type="submit">
+	<input type="submit" value="Submit">
+	<input type="submit">
+	přidat hodnotu value pro správnou funkcionalitu formu
+	Po otevření průzkumníku (F12):<!-- I hate my job!!!!-->
+	<!-- I hate my job!!!!-->
+	Nemusí tam být
+	<!-- I hate my job!!!!-->
+	Smazání komentáře, je zbytečný
+	Po otevření průzkumníku (F12): <h1 style="text-align: center;">Welcome</h1>
+	<h1 align="center">
+	<h1 style="text-align: center;">Welcome</h1>
+	<h1 align="center">
+	Je lepší to oddělit do style.css, nebo do atributu style 
+	Po otevření průzkumníku (F12): div pro vypis odpovedi
+	<div style="width:8000px" >”Welcome gdg from . There are 0 vowels in your first name and 3 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.”</div>
+	<div style="width:80%" >”Welcome gdg from . There are 0 vowels in your first name and 3 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.”</div>
+	<div style="width:8000px" >”Welcome gdg from . There are 0 vowels in your first name and 3 consonants in your first name and there are 0 vowels in your city and 0 consonants in your city.”</div>
+	Pro responzibilitu je lepsi zadat % hodnotu šířky.
+	Celkový css stránky
+	
+
+	
+
+	
+
+	Je třeba přidat css souboru a nastavit responzibilitu stránce, opravit velikosti textu, upravit labely,
